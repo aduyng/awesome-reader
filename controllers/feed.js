@@ -40,7 +40,10 @@ exports.parseInfo = function(req, res, next) {
             });
         });
     })().then(function(resp) {
-        res.send({name: resp.responseData.feed.title, iconUrl: resp.responseData.feed.link + '/favicon.ico'});
-    }).catch (next);
+        res.send({
+            name    : resp.responseData.feed.title, 
+            iconUrl : resp.responseData.feed.link + '/favicon.ico'
+        });
+    }).catch(next);
 
 };
