@@ -1,8 +1,0 @@
-{{#each bills}}
-<a href="#bill/view/id/{{this.id}}" type="button" class="btn btn-list-item {{this.state.buttonClass}} btn-block btn-lg clearfix">
-        <span class="pull-right right">{{formatMoney this.amount}}</span>
-        B{{this.id}} - {{this.customer.name}}
-    </a>
-{{else}}
-<p class="alert alert-warning">{{$ thereIsNoBillsAddedYet}}</p>
-{{/each}}

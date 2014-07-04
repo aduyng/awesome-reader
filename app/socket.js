@@ -40,12 +40,7 @@ define(function (require) {
         _.extend(options, callbacks);
 
         options.data.now = moment().unix();
-        // if( !options.headers){
-        //     options.headers = {};
-        // };
-        
-        // _.extend(options.headers, {'X-Version': window.config.version, 'X-Now': moment().unix()});
-        
+
         return Backbone.ajax.call(this, options);
     };
 
