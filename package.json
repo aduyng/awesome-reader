@@ -1,0 +1,55 @@
+{
+  "name": "esalon",
+  "version": "1.0.5",
+  "clientPath":"",
+  "cdn": true,
+  "private": true,
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "3.5.1",
+    "express3-handlebars": "^0.5.0",
+    "express-load": "^1.1.9",
+    "connect-redis": "1.4.7",
+    "connect": "^2.14.3",
+    "knex": "^0.5.13",
+    "bookshelf": "^0.6.10",
+    "underscore": "^1.6.0",
+    "underscore.string": "^2.3.3",
+    "moment": "^2.5.1",
+    "pg": "^2.11.1",
+    "request": "~2.34.0",
+    "bluebird": "~1.2.4",
+    "handlebars": "~2.0.0-alpha.2",
+    "accounting": "~0.3.2",
+    "colors": "~0.6.2"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-requirejs": "^0.4.3",
+    "grunt-express": "^1.2.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "matchdep": "^0.3.0",
+    "grunt-concurrent": "^0.5.0",
+    "grunt-external-daemon": "^1.1.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-less": "^0.11.0",
+    "grunt-contrib-htmlmin": "^0.2.0",
+    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-cdnify": "0.0.2",
+    "grunt-devtools": "^0.2.1",
+    "grunt-shell-spawn": "^0.3.0",
+    "uglifyjs": "^2.3.6",
+    "grunt-file-creator": "~0.1.1",
+    "grunt-mocha-test": "~0.10.2",
+    "mocha": "~1.18.2",
+    "chai": "~1.9.1",
+    "should": "~3.3.1",
+    "better-console": "~0.2.3"
+  }
+}

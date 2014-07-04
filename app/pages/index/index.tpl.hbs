@@ -1,0 +1,49 @@
+<div class="page-header">
+    <div class="pull-right">
+        <a href="#index/sign-out"
+           class="btn btn-warning"><i class="fa fa-sign-out"></i> {{$ signOut}}</a>
+    </div>
+    <h3>{{userName}}</h3>
+</div>
+<div id="{{id}}-list">
+    {{#if stores.length}}
+    <a href="#ticket/view"
+       class="btn btn-success btn-lg btn-block"><i class="fa fa-plus"></i> {{$ newTicket}}</a>
+    <a href="#ticket/index"
+       class="btn btn-info btn-lg btn-block"><i class="fa fa-tasks"></i> {{$ tickets}}</a>
+    <a href="#bill/view"
+       class="btn btn-success btn-lg btn-block"><i
+            class="fa fa-external-link"></i> {{$ newBill}}</a>
+    <a href="#bill/index"
+       class="btn btn-info btn-lg btn-block"><i
+            class="fa fa-list-alt"></i> {{$ bills}}</a>
+
+    <a href="#store/daily-summary"
+           class="btn btn-default btn-lg btn-block"><i class="fa fa-calendar-o"></i> {{$ dailySummary}}</a>
+           
+    {{#if isOwner}}
+        
+        
+        <!--a href="#owner/reports-select-period"
+           class="btn btn-default btn-lg btn-block"><i class="fa fa-bar-chart-o"></i> {{$ reports}}</a-->
+
+        <a href="#user/index"
+           class="btn btn-default btn-lg btn-block"><i class="fa fa-users"></i> {{$ manageUsers}}</a>
+        <a href="#category/index"
+           class="btn btn-default btn-lg btn-block"><i class="fa fa-tags"></i> {{$ manageServiceCategories}}</a>
+        <a href="#product/index"
+           class="btn btn-default btn-lg btn-block"><i class="fa fa-tag"></i> {{$ manageServices}}</a>
+        <a href="#store/edit"
+           class="btn btn-default btn-lg btn-block"><i class="fa fa-wrench"></i> {{$ storeSettings}}</a>
+
+    {{/if}}
+    
+    {{else}}
+        <div class="alert alert-warning">{{$ noStoresAssociated}}</div>
+        
+        <a href="#user/my-stores"
+       class="btn btn-info btn-lg btn-block"><i
+            class="fa fa-building-o"></i> {{$ myStores}}</a>
+    {{/if}}
+
+</div>

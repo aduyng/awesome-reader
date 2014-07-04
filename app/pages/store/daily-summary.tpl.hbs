@@ -1,0 +1,24 @@
+<div class="page-header">
+    <div class="pull-right">
+        <button class="btn btn-default"
+                id="{{id}}-back"><i class="fa fa-arrow-circle-left"></i> {{$ goBack}}</button>
+    </div>
+    <h3>{{$ dailySummary}}</h3>
+</div>
+
+{{#if isOwner}}
+<div class="well well-small">
+    <div role="form" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-xs-4 control-label" for="{{id}}-date">{{$ date}}</label>
+            <div class="col-xs-8">
+                <input type="date" class="form-control {{id}}-filter" id="{{id}}-date" value="{{formatDateForDateInput date}}"/>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+<div id="{{id}}-results">
+
+</div>

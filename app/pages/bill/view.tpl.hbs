@@ -1,0 +1,32 @@
+<div class="page-header">
+    <div class="pull-right">
+        <button class="btn btn-default"
+                id="{{id}}-back"><i class="fa fa-arrow-circle-left"></i> {{$ goBack}}</button>
+    </div>
+    {{#if selectTechnician}}
+        <h3>{{$ selectTechnician}}</h3>
+    {{/if}}
+    
+    {{#if selectTickets}}
+        <h3>{{$ selectTickets}}</h3>
+    {{/if}}        
+    
+    {{#if editView}}
+        <h3>{{$ bill}} B{{bill.id}}</h3>
+    {{/if}}
+</div>
+
+{{#if selectTechnician}}
+    <div id="{{id}}-select-technician" class="select-technician">
+    </div>
+{{/if}}
+
+{{#if selectTickets}}
+    <div id="{{id}}-select-tickets" class="select-tickets">
+    </div>
+{{/if}}
+
+{{#if editView}}
+    <div id="{{id}}-edit-view" class="edit-view">
+    </div>
+{{/if}}

@@ -1,0 +1,48 @@
+<div class="page-header">
+    <div class="pull-right">
+        <button class="btn btn-default" id="{{id}}-back">
+            <i class="fa fa-arrow-circle-left"></i>{{$ goBack}}</button>
+    </div>
+    <h3>{{$ bills}}</h3>
+</div>
+<div class="well well-small">
+    <div role="form" class="form-horizontal">
+        {{#if isOwner}}
+        <div class="form-group">
+            <label class="col-xs-4 control-label" for="{{id}}-start">{{$ start}}</label>
+            <div class="col-xs-8">
+                <input type="date" class="form-control {{id}}-filter" id="{{id}}-start" value="{{formatDateForDateInput start}}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label" for="{{id}}-end">{{$ end}}</label>
+            <div class="col-xs-8">
+                <input type="date" class="form-control {{id}}-filter"  id="{{id}}-end" value="{{formatDateForDateInput end}}"/>
+            </div>
+        </div>
+        {{/if}}
+        
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    {{#each billStatuses}}
+                        <label class="btn {{this.buttonClass}} {{../id}}-bill-status-label">
+                            <input type="checkbox" class="{{../id}}-bill-status {{id}}-filter" value="{{this.id}}"><i class="fa {{this.iconClass}}"></i> {{this.name}}
+                        </label>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="#bill/view" class="btn btn-success btn-lg btn-block"><i class="fa fa-plus"></i> {{$ newBill}}</a>
+        <a href="#ticket/view" class="btn btn-success btn-lg btn-block"><i class="fa fa-plus"></i> {{$ newTicket}}</a>
+    </div>
+    <div class="panel-body">
+        <div class="bill-list" id="{{id}}-bill-list"></div>
+    </div>
+</div>

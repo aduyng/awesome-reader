@@ -1,0 +1,112 @@
+<span class="hide {{id}}-i18n" data-key="userHasBeenSavedSuccessfully">{{$ userHasBeenSavedSuccessfully}}</span>
+<span class="hide {{id}}-i18n" data-key="userSaveFailed">{{$ userSaveFailed}}</span>
+<span class="hide {{id}}-i18n" data-key="userHasBeenDeletedSuccessfully">{{$ userHasBeenDeletedSuccessfully}}</span>
+<span class="hide {{id}}-i18n" data-key="userDeleteFailed">{{$ userDeleteFailed}}</span>
+
+
+<div class="page-header">
+    <div class="pull-right">
+        <button class="btn btn-default" id="{{id}}-back"><i class="fa fa-arrow-circle-left"></i> {{$ goBack}}</button>
+    </div>
+    <h3>{{#if user.id}}{{$ editUser}}{{else}}{{$ newUser}}{{/if}}</h3>
+</div>
+
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-name">{{$ name}}</label>
+    <input type="text" class="form-control input-lg {{id}}-field" id="{{id}}-name"
+           value="{{user.name}}" {{#unless user.isEditable}}readonly{{/unless}}/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-phone">{{$ phone}}</label>
+    <input type="tel" maxlength="10" class="form-control input-lg {{id}}-field" id="{{id}}-phone"
+           value="{{user.phone}}" {{#unless user.isEditable}}readonly{{/unless}}/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-address">{{$ address}}</label>
+    <input type="text" class="form-control input-lg {{id}}-field" id="{{id}}-address"
+           value="{{user.address}}" {{#unless user.isEditable}}readonly{{/unless}}/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-email">{{$ email}}</label>
+    <input type="email" class="form-control input-lg {{id}}-field" id="{{id}}-email"
+           value="{{user.email}}" {{#unless user.isEditable}}readonly{{/unless}}/>
+</div>
+<div class="form-group">
+    <label class="control-label" for="{{id}}-ssn">{{$ socialSecurityNumber}}</label>
+    <input type="number" maxlength="9" class="form-control input-lg {{id}}-field" id="{{id}}-ssn"
+           value="{{user.ssn}}" {{#unless user.isEditable}}readonly{{/unless}}/>
+</div>
+<div class="form-group">
+    <label class="control-label" for="{{id}}-pin">{{$ pin}}</label>
+    <input type="number" maxlength="4" class="form-control input-lg {{id}}-field" id="{{id}}-pin"
+           value="{{user.pin}}" {{#unless user.isEditable}}readonly{{/unless}}/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-role-id">{{$ role}}</label>
+
+    <div class="radio-group {{id}}-field" id="{{id}}-role-id">
+        <div class="radio">
+            <label>
+                <input type="radio" name="{{id}}-role-id" value="{{ownerRoleId}}"
+                       {{#if user.isOwner}}checked{{/if}} /> {{$ roleOwner}}
+            </label>
+        </div>
+
+        <div class="radio">
+            <label>
+                <input type="radio" name="{{id}}-role-id" value="{{technicianRoleId}}"
+                       {{#unless user.isOwner}}checked{{/unless}} /> {{$ roleTechnician}}
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-commission-ratio">{{$ commissionRatio}}</label>
+    <input type="number" maxlength="4" class="form-control input-lg {{id}}-field" id="{{id}}-commission-ratio"
+           data-bts-postfix="%"
+           value="{{user.commissionRatio}}"/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-cash-ratio">{{$ cashPaymentRatio}}</label>
+    <input type="number" maxlength="4" class="form-control input-lg {{id}}-field" id="{{id}}-cash-ratio"
+           data-bts-postfix="%"
+           value="{{user.cashRatio}}"/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-salary-warranted-amount">{{$ salaryWarrantedAmount}}</label>
+    <input type="number" maxlength="4" class="form-control input-lg {{id}}-field"
+           id="{{id}}-salary-warranted-amount"
+           data-bts-postfix="%"
+           data-bts-step="50"
+           data-bts-max="5000"
+           value="{{user.salaryWarrantedAmount}}"/>
+</div>
+
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input class="{{id}}-field" id="{{id}}-is-active" type="checkbox"
+                   {{#if user.isActive}}checked{{/if}}>
+            {{$ active}}?
+        </label>
+    </div>
+</div>
+
+
+<div class="page-footer">
+    <button class="btn btn-primary btn-lg btn-block" id="{{id}}-save"><i class="fa fa-save"></i> {{$ save}}
+    </button>
+
+    {{#if user.id}}
+        <button type="button" id="{{id}}-delete" class="btn btn-warning btn-block"><i class="fa fa-trash-o"></i> <span
+                class="bcb-label">{{$ delete}}</span></button>
+    {{/if}}
+</div>

@@ -1,0 +1,14 @@
+<div class="page-header">
+    <h3><i class="fa fa-unlock"></i> {{$ "signIn"}}</h3>
+</div>
+<input type="tel" id="{{id}}-phone" class="form-control input-lg tel"
+maxlength="10" placeholder="{{$ enterYourPhoneNumber}}" />
+<div class=" clearfix pin-container">
+    <input type="tel" id="{{id}}-pin" maxlength="4" class="form-control input-lg pin"
+    placeholder="{{$ enterYourPIN}}" />
+    <div for="{{id}}-pin" class="pin-mask" id="{{id}}-pin-mask"></div>
+</div>
+<button type="button" id="{{id}}-submit" class="btn btn-primary btn-lg btn-block login-button">
+    <i class="fa fa-sign-in"></i> {{$ signIn}}</button>
+
+<a href="#index/register" id="{{id}}-register" class="btn btn-link btn-block">{{$ register}}</a>

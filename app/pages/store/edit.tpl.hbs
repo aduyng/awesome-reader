@@ -1,0 +1,105 @@
+<span class="hide {{id}}-i18n" data-key="storeHasBeenSavedSuccessfully">{{$ storeHasBeenSavedSuccessfully}}</span>
+<span class="hide {{id}}-i18n" data-key="storeSaveFailed">{{$ storeSaveFailed}}</span>
+
+<div class="page-header">
+    <div class="pull-right">
+        <button class="btn btn-default" id="{{id}}-back"><i class="fa fa-arrow-circle-left"></i> {{$ goBack}}</button>
+    </div>
+    <h3>{{$ storeSettings}}</h3>
+</div>
+
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-default-commission-ratio">{{$ defaultCommissionRatio}}</label>
+    <div class="col-xs-11">
+        <input type="number" class="form-control input-lg {{id}}-field" id="{{id}}-default-commission-ratio"
+            data-bts-button-down-class="btn btn-warning"
+            data-bts-button-up-class="btn btn-success"
+            value="{{settings.defaultCommissionRatio}}"
+            data-bts-max="100"
+            data-bts-postfix="%"/>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label" for="{{id}}-turn-threshold-amount">{{$ turnThresholdAmount}}</label>
+    <div class="col-xs-11">
+        <input type="number" class="form-control input-lg {{id}}-field" id="{{id}}-turn-threshold-amount"
+            data-bts-button-down-class="btn btn-warning"
+            data-bts-button-up-class="btn btn-success"
+            value="{{settings.turnThresholdAmount}}"
+            data-bts-max="5000"
+            data-bts-postfix="$"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-default-tip-deduction-ratio">{{$ defaultTipDeductionRatio}}</label>
+    <div class="col-xs-11">
+        <input type="number" class="form-control input-lg {{id}}-field" id="{{id}}-default-tip-deduction-ratio"
+            data-bts-button-down-class="btn btn-warning"
+            data-bts-button-up-class="btn btn-success"
+            value="{{settings.defaultTipDeductionRatio}}"
+            data-bts-max="100"
+            data-bts-postfix="%"/>
+   </div>
+</div>
+<div class="form-group">
+    <label class="control-label" for="{{id}}-default-cash-ratio">{{$ defaultCashRatio}}</label>
+    <div class="col-xs-11">
+        <input type="number" class="form-control input-lg {{id}}-field" id="{{id}}-default-cash-ratio"
+            data-bts-button-down-class="btn btn-warning"
+            data-bts-button-up-class="btn btn-success"
+            value="{{settings.defaultCashRatio}}"
+            data-bts-max="100"
+            data-bts-postfix="%"/>
+    </div>
+</div>
+<div class="form-group clearfix">
+    <label class="control-label" for="{{id}}-salary-warranted-amount">{{$ defaultSalaryWarrantedAmount}}</label>
+    <div class="col-xs-11">
+        <input type="number" class="form-control input-lg {{id}}-field" id="{{id}}-default-salary-warranted-amount"
+           value="{{settings.defaultSalaryWarrantedAmount}}"
+           data-bts-postfix="$"
+           data-bts-max="5000"
+           data-bts-step="50"
+            />
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input class="{{id}}-field" id="{{id}}-is-technician-manages-tasks-allowed" type="checkbox"
+                   {{#if settings.isTechnicianManagesTasksAllowed}}checked{{/if}}> {{$ isTechnicianManagesTasksAllowed}}
+        </label>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-name">{{$ storeName}}</label>
+    <input type="text" class="form-control input-lg {{id}}-field" id="{{id}}-name" value="{{settings.name}}"/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-alias">{{$ storeAlias}}</label>
+    <input type="text" class="form-control input-lg " id="{{id}}-alias" value="{{settings.alias}}" readonly/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-address">{{$ address}}</label>
+    <input type="text" class="form-control input-lg {{id}}-field" id="{{id}}-address" value="{{settings.address}}"/>
+</div>
+
+<div class="form-group">
+    <label class="control-label" for="{{id}}-phone">{{$ phone}}</label>
+    <input type="tel" class="form-control input-lg {{id}}-field" id="{{id}}-phone" value="{{settings.phone}}"/>
+</div>
+<div class="form-group">
+    <label class="control-label" for="{{id}}-email">{{$ email}}</label>
+    <input type="email" class="form-control input-lg {{id}}-field" id="{{id}}-email" value="{{settings.email}}"/>
+</div>
+<div class="page-footer">
+    <button class="btn btn-primary btn-lg btn-block" id="{{id}}-save"><i class="fa fa-save"></i> {{$ save}}</button>
+</div>

@@ -1,0 +1,240 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>{{$ customerInfo}}</h4>
+    </div>
+    <div class="panel-body">
+    
+        <div class="form-group">
+            <label class="control-label">{{$ phone}}</label>
+            {{#if isEditable}}
+            <input type="tel"
+                   class="form-control input-lg {{id}}-field"
+                   id="{{id}}-customer-phone"
+                   value="{{bill.customer.phone}}"/>
+            {{else}}
+            <p class="form-control-static">{{bill.customer.phone}}</p>
+            {{/if}}
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label">{{$ name}}</label>
+            {{#if isEditable}}
+            <input type="text"
+                   class="form-control input-lg {{id}}-field"
+                   id="{{id}}-customer-name"
+                   value="{{bill.customer.name}}"/>
+           {{else}}
+            <p class="form-control-static">{{bill.customer.name}}</p>
+            {{/if}}
+        </div>
+               
+        
+    </div>
+</div>
+
+
+<div class="panel {{#if tickets.length}}panel-success{{else}}panel-danger{{/if}}">
+    <div class="panel-heading">
+        <h4><strong class="pull-right">{{formatMoney bill.amount}}</strong>{{$ tickets}}
+            <small>({{tickets.length}})</small>
+        </h4>
+    </div>
+    <div class="panel-body">
+        {{#each tickets}}
+            <a href="#ticket/view/id/{{this.id}}" type="button"
+                    class="btn btn-list-item btn-lg btn-default btn-block clearfix" >
+                <small class="pull-right right">{{formatMoney this.amount}}</small>
+                {{this.technicianName}} T{{this.id}} - {{this.technician.name}}
+                <small>({{this.nbOfTasks}})</small>
+            </a>
+        {{else}}
+            <div class="alert alert-warning">
+                <i class="fa fa-warning"></i> {{$ noTicketsHasBeenAdded}}
+            </div>
+        {{/each}}
+        
+    </div>
+    {{#if isEditable}}
+    <div class="panel-footer ">
+        <a href="#bill/view/action/select-tickets/id/{{bill.id}}"
+           class="btn btn-info btn-block btn-lg"><i class="fa fa-list-alt"></i> {{$ selectTicket}}</a>
+    </div>
+    {{/if}}
+    
+</div>
+
+
+{{#if tickets.length}}
+
+    <div class="form-group">
+        
+        {{#if isEditable}}
+        <label class="control-label">{{$ tip}} <small>({{$ onlyCreditCardAmountShouldBeRecorded}})</small></label>
+        <div class="row">
+            <div class="col-xs-11">         
+                <input type="number"
+                    class="form-control input-lg {{id}}-field"
+                    id="{{id}}-tip"
+                    data-bts-postfix="$"
+                    data-bts-button-down-class="btn btn-warning"
+                    data-bts-button-up-class="btn btn-success"
+                    data-bts-max="9999"
+                    data-bts-min="0"
+                    value="{{bill.tip}}"/>
+            </div>
+        </div>
+       {{else}}
+       <div class="row">
+            <div class="col-xs-8">
+                <label class="control-label">{{$ tip}} <small>({{$ onlyCreditCardAmountShouldBeRecorded}})</small></label>
+            </div>
+            <div class="col-xs-4"> 
+                <p class="form-control-static text-right">{{formatMoney bill.tip}}</p>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="panel panel-success"
+         id="{{id}}-payment-panel">
+        <div class="panel-heading">
+            <h4>{{$ payments}} <span class="pull-right"
+                                     id="{{id}}-payment-remaining"></span></h4>
+        </div>
+        <div class="panel-body">
+            {{#each payments}}
+                <div class="form-group {{../id}}-payment-group">
+                    {{#if ../isEditable}}
+                    <div class="row">
+                        <div class="col-xs-11">
+                            <label class="control-label">{{this.name}}</label>
+                            <input type="number"
+                               class="form-control input-lg {{../../id}}-payment"
+                               id="{{../../id}}-payment-{{id}}"
+                               data-bts-postfix="<i class='fa fa-caret-square-o-left'></i>"
+                               data-bts-button-down-class="btn btn-warning"
+                               data-bts-button-up-class="btn btn-success"
+                               data-bts-button-up-class="btn btn-success"
+                               data-bts-max="9999"
+                               data-bts-min="0"
+                               data-id="{{this.id}}"
+                               value="{{this.amount}}"/>
+                        </div>
+                    </div>
+                    {{else}}
+                     <div class="row">
+                        <label class="col-xs-8 control-label">{{this.name}}</label>
+                        <div class="col-xs-4">
+                            <p class="form-control-static text-right">{{formatMoney this.amount}}</p>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="panel panel-success hide"
+         id="{{id}}-tip-distribution-panel">
+        <div class="panel-heading">
+            <h4>{{$ tipDistribution}} <span class="pull-right"
+                                            id="{{id}}-tip-remaining"></span></h4>
+        </div>
+        <div class="panel-body">
+            {{#each tickets}}
+                <div class="form-group {{../id}}-tip-group">
+                    {{#if ../isEditable}}
+                    <div class="row">
+                        <div class="col-xs-11">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <label class="control-label"><i class="fa fa-user"></i> {{this.technician.name}}</label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="text-right {{../../id}}-proposed-tip"
+                                        data-id="{{this.id}}">{{formatMoney this.proposedTip}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-11">
+                            <input type="number"
+                               class="form-control input-lg {{../../id}}-tip"
+                               id="{{../../id}}-tip-{{id}}"
+                               data-bts-prefix="<i class='fa fa-caret-square-o-right'></i>"
+                               data-bts-postfix="<i class='fa fa-caret-square-o-left'></i>"
+                               data-bts-button-down-class="btn btn-warning"
+                               data-bts-button-up-class="btn btn-success"
+                               data-id="{{this.id}}"
+                               value="{{this.tip}}"/>
+                        </div>
+                    </div>
+                     {{else}}
+                     <div class="row">
+                        <label class="col-xs-8 control-label"><i class="fa fa-user"></i> {{this.technician.name}}</label>
+
+                        <div class="col-xs-4">
+                            <p class="form-control-static text-right">{{formatMoney this.tip}}</p>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+{{/if}}
+
+<div class="form-group">
+    <label class="control-label">{{$ dateCreated}}</label>
+    {{#if isDateChangeable}}
+        <div class="row">
+            <div class="col-xs-7">
+                <input type="date"
+                       class="form-control {{id}}-date-created"
+                       id="{{id}}-date-created"
+                       value="{{formatDateForDateInput bill.dateCreated}}"/>
+            </div>
+           <div class="col-xs-5">
+                <input type="time"
+                       class="form-control {{id}}-date-created"
+                       id=" {{id}}-time-created"
+                       value="{{formatShortTimeForTimeInput bill.dateCreated}}"/>
+            </div>
+        </div>
+    {{else}}   
+        <p class="form-control-static">{{formatDateTime bill.dateCreated}} ({{fromNow bill.dateCreated}})</p>
+    {{/if}}
+</div>
+
+<div class="form-group">
+    <label class="control-label">{{$ status}}</label>
+
+    <p class="form-control-static">{{formatBillStatus bill.stateId}}</p>
+</div>
+
+<div class="page-footer">
+    {{#if isCheckoutable}}
+    <button type="button"
+            id="{{id}}-checkout"
+            class="btn btn-primary btn-lg btn-block"><i
+            <i class="fa fa-shopping-cart"></i> {{$ checkout}}
+    </button>
+    {{/if}}
+    
+    {{#if isVoidable}}
+    <button type="button"
+            id="{{id}}-void"
+            class="btn btn-warning btn-block"><i class="fa fa-fire"></i> <span
+            class="bcb-label">{{$ void}}</span>
+    </button>
+    {{/if}}
+
+    {{#if isDeletable}}
+        <button type="button"
+            id="{{id}}-delete"
+            class="btn btn-warning btn-block"><i class="fa fa-trash-o"></i> <span
+            class="bcb-label">{{$ delete}}</span></button>
+    {{/if}}
+</div>

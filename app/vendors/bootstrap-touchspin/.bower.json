@@ -1,0 +1,15 @@
+{
+  "name": "bootstrap-touchspin",
+  "homepage": "https://github.com/istvan-ujjmeszaros/bootstrap-touchspin",
+  "version": "2.7.1",
+  "_release": "2.7.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.7.1",
+    "commit": "f26ab8058730c0834692cc8257925fa6b647ad90"
+  },
+  "_source": "git://github.com/istvan-ujjmeszaros/bootstrap-touchspin.git",
+  "_target": "~2.7.1",
+  "_originalSource": "bootstrap-touchspin",
+  "_direct": true
+}

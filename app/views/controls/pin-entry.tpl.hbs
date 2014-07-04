@@ -1,0 +1,12 @@
+<div class="pin-entry">
+    <input type="tel" id="{{id}}-pin-label" class="form-control input-lg">
+    <br/>
+
+    <div id="{{id}}-digits" class="clearfix">
+        {{#each digits}}
+            <button class="btn btn-default col-xs-4 digit" type="button" id="{{id}}-{{this}}" data-value="{{this}}">{{this}}</button>
+        {{/each}}
+        <button class="btn btn-warning col-xs-8" type="button" id="{{id}}-reset"><i class="fa fa-eraser"></i> Clear</button>
+
+    </div>
+</div>

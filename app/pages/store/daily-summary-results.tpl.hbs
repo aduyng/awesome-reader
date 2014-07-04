@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>At-a-glance</h4>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="label label-info pull-right">{{formatMoney store.gross}}</span>Gross Income</li>
+            <li class="list-group-item">
+                <span class="label label-success pull-right">{{formatMoney store.net}}</span>Net Income</li>
+            <li class="list-group-item">
+                <span class="label label-default pull-right">{{formatNumber store.nbOfBills}}</span>Number of Bills</li>
+            <li class="list-group-item">
+                <span class="label label-default pull-right">{{formatNumber store.nbOfTickets}}</span>Number of Tickets</li>
+            <li class="list-group-item">
+                <span class="label label-default pull-right">{{formatNumber store.nbOfTasks}}</span>Number of Tasks</li>    
+        </ul>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h4>Payments</h4>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            {{#each payments}}
+            <li class="list-group-item">
+                <span class="label label-success pull-right">{{formatMoney this.total}}</span>{{this.name}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+
+<h3>Technicians</h3>
+{{#each technicians}}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>{{this.name}}</h4>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="label label-info pull-right">{{formatMoney this.gross}}</span>Gross Income</li>
+            <li class="list-group-item">
+                <span class="label label-success pull-right">{{formatMoney this.net}}</span>Net Income</li>
+            <li class="list-group-item">
+                <span class="label label-info pull-right">{{formatMoney this.tipGross}}</span>Gross Tip</li>
+            <li class="list-group-item">
+                <span class="label label-success pull-right">{{formatMoney this.tipNet}}</span>Net Tip</li>
+            <li class="list-group-item">
+                <span class="label label-default pull-right">{{formatNumber this.nbOfTickets}}</span>Number of Tickets</li>
+            <li class="list-group-item">
+                <span class="label label-default pull-right">{{formatNumber this.turns}}</span>Number of Turns</li>
+        </ul>
+    </div>
+</div>
+{{/each}}
+
+

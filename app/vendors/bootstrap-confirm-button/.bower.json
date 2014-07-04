@@ -1,0 +1,27 @@
+{
+  "name": "bootstrap-confirm-button",
+  "main": "bootstrap-confirm-button.js",
+  "authors": [
+    "Duy A. Nguyen <aduyng@gmail.com>"
+  ],
+  "description": "A small plugin that requires to click twice to proceed. Useful for confirming before delete operation.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {},
+  "homepage": "https://github.com/aduyng/bootstrap-confirm-button",
+  "_release": "4bc2df8b00",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4bc2df8b00baaacc8efe4bcf6f8adacb2a52427f"
+  },
+  "_source": "git://github.com/aduyng/bootstrap-confirm-button.git",
+  "_target": "*",
+  "_originalSource": "bootstrap-confirm-button"
+}

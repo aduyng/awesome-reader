@@ -1,0 +1,174 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading"
+         id="{{id}}-technician-heading">
+         {{#if isAllowedToEditTechnicianInfo}}<div class="pull-right"><input type="checkbox" value="0" id="{{id}}-technician-info-switch" data-on-text="<i class='fa fa-unlock'></i>" data-off-text="<i class='fa fa-lock'></i>" /></div>{{/if}}
+        <h4><i class="fa fa-user"></i> {{ticket.technician.name}}</h4>
+    </div>
+    {{#if isEditable }}
+        {{#if isAllowedToViewTechnicianInfo}}
+        <div class="panel-body hide"
+             id="{{id}}-technician-body">
+            <div class="form-group"
+                 id="{{id}}-commission-ratio-group">
+                <label class="control-label"> {{$ commissionRatio}} (%)</label>
+                <div class="col-xs-11">
+                    <input type="number"
+                       class="form-control input-lg {{id}}-field {{id}}-technician-info"
+                       required
+                       id="{{id}}-commission-ratio"
+                       data-bts-button-down-class="btn btn-warning"
+                       data-bts-button-up-class="btn btn-success"
+                       value="{{ticket.commissionRatio}}"/>
+                </div>
+            </div>
+    
+    
+            <div class="form-group">
+                <label class="control-label"
+                       for="{{id}}-turn-increased-by">{{$ turnIncreasedBy}}</label>
+                <div class="col-xs-11">
+                    <input type="number"
+                       class="form-control input-lg {{id}}-field {{id}}-technician-info"
+                       id="{{id}}-turn-increased-by"
+                       required
+                       data-bts-button-down-class="btn btn-warning"
+                       data-bts-button-up-class="btn btn-success"
+                       value="{{ticket.turnIncreasedBy}}"/>
+                </div>
+            </div>
+    
+    
+            <div class="form-group">
+                <label class="control-label">{{$ tipDivisionRatio}} (%)</label>
+                <div class="col-xs-11">
+                    <input type="number"
+                       class="form-control input-lg {{id}}-field {{id}}-technician-info"
+                       id="{{id}}-tip-division-ratio"
+                       data-bts-button-down-class="btn btn-warning"
+                       data-bts-button-up-class="btn btn-success"
+                       value="{{ticket.tipDivisionRatio}}"/>
+                </div>
+            </div>
+    
+        </div>
+        {{/if}}
+    {{/if}}
+    
+    {{#if isEditable }}
+        {{#if isTechnicianChangeable}}
+        <div class="panel-footer ">
+            <a href="#ticket/view/action/select-technicians/id/{{ticket.id}}/technician/{{ticket.technician.id}}/start/{{start}}/end/{{end}}"
+               id="{{id}}-select-technician"
+               class="btn btn-lg btn-block btn-info"><i class="fa fa-refresh"></i> {{$ changeTechnician}}</a>
+        </div>
+        {{/if}}
+    {{/if}}
+</div>
+
+
+<div class="panel {{#if tasks.length}}panel-success{{else}}panel-danger{{/if}}">
+    <div class="panel-heading">
+        <h4><strong class="pull-right"
+                    id="{{id}}-amount">{{formatMoney ticket.amount}}</strong><i class="fa fa-tags"></i> {{$ services}}
+            <small>({{tasks.length}})</small>
+        </h4>
+    </div>
+    
+    <div class="panel-body">
+        {{#each tasks}}
+            {{#if ../isEditable}}
+                {{#if ../../isTicketPriceChangable}}
+                    <div class="form-group">
+                        <label class="control-label"><small class="text-muted">{{this.category.name}} <i class="fa fa-angle-right"></i> </small>{{this.product.name}}</label>
+                        <div class="col-xs-11">
+                            <input type="number"
+                               class="form-control input-lg {{../../../id}}-price"
+                               id="{{../../../id}}-price-{{this.id}}"
+                               data-id="{{this.id}}"
+                               data-bts-button-down-class="btn btn-warning"
+                               data-bts-button-up-class="btn btn-success"
+                               value="{{this.price}}"/>
+                        </div>
+                    </div>
+                {{else}}
+                    <div class="row">
+                        <label class="col-xs-8 control-label"><small class="text-muted">{{this.category.name}} <i class="fa fa-angle-right"></i> </small>{{this.product.name}}</label>
+                        <div class="col-xs-4">
+                            <p class="form-control-static text-right">{{formatMoney this.price}}</p>
+                        </div>
+                    </div>
+                {{/if}}
+            {{else}}
+                <div class="row">
+                    <label class="col-xs-8 control-label"><small class="text-muted">{{this.category.name}} <i class="fa fa-angle-right"></i> </small>{{this.product.name}}</label>
+                    <div class="col-xs-4">
+                        <p class="form-control-static text-right">{{formatMoney this.price}}</p>
+                    </div>
+                </div>
+
+            {{/if}}
+        {{else}}
+            <div class="alert alert-warning">
+                <i class="fa fa-warning"></i> {{$ noProductsHasBeenAdded}}
+            </div>
+        {{/each}}
+    </div>
+    {{#if isEditable}}
+    <div class="panel-footer">
+        <a href="#ticket/view/id/{{ticket.id}}/action/select-services"
+           id="{{id}}-select-products"
+           class="btn btn-info btn-block btn-lg"><i
+                class="fa fa-refresh"></i> {{$ changeServices}}</a>
+    </div>
+    {{/if}}
+</div>
+
+<div class="form-group">
+    <label class="control-label">{{$ dateCreated}}</label>
+    {{#if isDateChangable}}
+        <div class="row">
+            <div class="col-xs-7">
+                <input type="date"
+                       class="form-control {{id}}-date-created"
+                       id="{{id}}-date-created"
+                       value="{{formatDateForDateInput ticket.dateCreated}}"/>
+            </div>
+           <div class="col-xs-5">
+                <input type="time"
+                       class="form-control {{id}}-date-created"
+                       id=" {{id}}-time-created"
+                       value="{{formatShortTimeForTimeInput ticket.dateCreated}}"/>
+            </div>
+        </div>
+    {{else}}   
+        <p class="form-control-static">{{formatDateTime ticket.dateCreated}} ({{fromNow ticket.dateCreated}})</p>
+    {{/if}}
+</div>
+
+
+<div class="form-group">
+    <label class="control-label">{{$ status}}</label>
+    <p class="form-control-static">{{formatTicketStatus ticket.stateId}}</p>
+</div>
+
+<div class="page-footer">
+    {{#if ticket.billId}}
+        <a href="#bill/view/id/{{ticket.billId}}"
+            class="btn btn-lg btn-info btn-block"><i class="fa fa-shopping-cart"></i> <span
+            class="bcb-label">{{$ goToBill}}</span></a>
+    {{/if}}
+    {{#if isCheckoutable}}
+        <button type="button"
+            id="{{id}}-checkout"
+            class="btn btn-lg btn-success btn-block"><i class="fa fa-shopping-cart"></i> <span
+            class="bcb-label">{{$ checkout}}</span></button>
+    {{/if}}
+    
+    {{#if isDeletable}}
+        <button type="button"
+            id="{{id}}-delete"
+            class="btn btn-warning btn-block"><i class="fa fa-trash-o"></i> <span
+            class="bcb-label">{{$ delete}}</span></button>
+    {{/if}}
+</div>

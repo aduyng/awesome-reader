@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<button class="btn btn-warning bcb-button"><i class="glyphicon glyphicon-trash"></i> <span
+        class="bcb-label">Delete</span></button>
+
+<button class="btn bcb-button" data-bcb-class="btn-primary"><i class="glyphicon glyphicon-trash"></i> <span
+        class="bcb-label">Delete</span></button>
+
+<button class="btn bcb-button" data-bcb-class="btn-danger" data-bcb-message="Are you sure?"><i class="glyphicon glyphicon-trash"></i> <span
+        class="bcb-label">Delete</span></button>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="bootstrap-confirm-button.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.bcb-button').click(function (event) {
+            alert("You have confirmed to proceed");
+        });
+        $('.bcb-button').bootstrapConfirmButton();
+    });
+</script>
+</body>
+</html>

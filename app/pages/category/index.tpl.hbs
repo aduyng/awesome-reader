@@ -1,0 +1,24 @@
+<div class="page-header">
+    <div class="pull-right">
+        <button class="btn btn-default" id="{{id}}-back"><i class="fa fa-arrow-circle-left"></i> {{$ goBack}}</button>
+    </div>
+    <h3>{{$ manageServices}}</h3>
+</div>
+
+<div>
+    <a href="#category/edit" class="btn btn-success btn-default btn-lg btn-block"><i class="fa fa-plus"></i> {{$ newServiceCategory}}</a>
+
+</div>
+
+<div class="page-body">
+    {{#each categories}}
+        <a href="#category/edit/id/{{this.id}}" type="button" class="btn btn-list-item btn-lg {{#if this.isActive}}btn-primary{{else}}btn-default{{/if}} btn-block clearfix">
+            <i class="fa fa-tags"></i> {{this.name}}</a>
+    {{else}}
+        <div class="alert alert-warning">
+            {{$ noProductCategoriesHasBeenAdded}}
+        </div>
+    {{/each}}
+</div>
+
+

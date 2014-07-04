@@ -1,0 +1,14 @@
+<div class="page-header">
+    <div class="pull-right">
+        <button class="btn btn-default" id="{{id}}-back"><i class="fa fa-arrow-circle-left"></i> {{$ goBack}}</button>
+    </div>
+    <h3>{{$ manageUsers}}</h3>
+</div>
+
+
+<div class="users">
+    <a href="#user/edit" class="btn btn-success btn-lg btn-block"><i class="fa fa-plus"></i> {{$ newUser}}</a>
+    {{#each users}}
+        <a href="#user/edit/id/{{this.id}}" type="button" class="btn btn-lg btn-list-item {{#if this.isActive}}btn-primary{{else}}btn-default{{/if}} btn-block clearfix"><small class="pull-right right">{{#if this.isOwner}}{{$ roleOwner}}{{else}}{{$ roleTechnician}}{{/if}}</small><i class="fa fa-user"></i> {{this.name}}</a>
+    {{/each}}
+</div>

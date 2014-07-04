@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{pkg.name}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <link media="all" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css"/>
+    <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.0.1/css/bootstrap3/bootstrap-switch.min.css"/>
+    <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.0/css/toastr.css"/>
+    <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.1.2/nprogress.min.css"/>
+    <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.1.0/ladda.min.css"/>
+    <link media="all" rel="stylesheet" href="{{path}}/style.css"/>
+
+    <link rel="shortcut icon" href="{{path}}/images/icon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{path}}/images/icon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{path}}/images/icon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{path}}/images/icon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{path}}/images/icon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{path}}/images/icon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{path}}/images/icon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{path}}/images/icon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{path}}/images/icon/apple-touch-icon-152x152.png">
+    <link rel="icon" type="image/png" href="{{path}}/images/icon/favicon-196x196.png" sizes="196x196">
+    <link rel="icon" type="image/png" href="{{path}}/images/icon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="{{path}}/images/icon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="{{path}}/images/icon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{path}}/images/icon/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{path}}/images/icon/mstile-144x144.png">
+    <meta name="msapplication-config" content="{{path}}/images/icon/browserconfig.xml">
+    <script type="text/javascript">
+        window.config = {
+            name               : '{{pkg.name}}',
+            version            : '{{pkg.version}}',
+            refreshFeedInterval: {{config.app.refreshFeedInterval}},
+            refreshTodoInterval: {{config.app.refreshTodoInterval}}
+        };
+        window.session = {
+            storeId: {{session.storeId}},
+            userId: {{session.userId}},
+            roleId: {{session.roleId}}
+        };
+    </script>
+</head>
+<body>
+<div id="app-loading" style="text-align: center;">{{pkg.name}} is loading. Please wait...</div>
+<script data-main="{{path}}/init.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
+</body>
+</html>
