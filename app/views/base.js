@@ -1,6 +1,8 @@
-/*global _, Backbone, _s*/
 define(function(require) {
-    var Super = Backbone.View;
+    var Backbone = require('backbone');
+    Super = Backbone.View,
+    _ = require('underscore'),
+    _s = require('underscore.string');
 
     function getGUID() {
         if (!window.guid) {
@@ -71,8 +73,8 @@ define(function(require) {
         }
         return id;
     };
-    View.prototype.isValid = function(){
-        if( this.validatorContainer ){
+    View.prototype.isValid = function() {
+        if (this.validatorContainer) {
             this.validatorContainer.data('bootstrapValidator').validate();
             return this.validatorContainer.data('bootstrapValidator').isValid();
         }
@@ -80,7 +82,7 @@ define(function(require) {
     }
     View.prototype.initValidators = function(options, container) {
         this.validatorContainer = (container || this.$el);
-        
+
         this.validatorContainer.bootstrapValidator(_.extend({
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',

@@ -1,8 +1,6 @@
 {
-  "name": "esalon",
+  "name": "awesome-reader",
   "version": "1.0.5",
-  "clientPath":"",
-  "cdn": true,
   "private": true,
   "engines": {
     "node": "0.10.x"
@@ -26,7 +24,8 @@
     "bluebird": "~1.2.4",
     "handlebars": "~2.0.0-alpha.2",
     "accounting": "~0.3.2",
-    "colors": "~0.6.2"
+    "colors": "~0.6.2",
+    "everyauth": "^0.4.5"
   },
   "devDependencies": {
     "grunt": "^0.4.4",

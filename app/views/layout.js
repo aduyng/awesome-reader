@@ -1,7 +1,6 @@
 define(function (require) {
     var Super = require('views/base'),
         Nav = require('views/nav'),
-        PageBlocker = require('views/controls/page-blocker'),
         Template = require("hbs!views/layout.tpl");
 
     var Layout = Super.extend({
@@ -32,18 +31,10 @@ define(function (require) {
                            });
         this.nav.render();
 
-
-        this.pageBlocker = new PageBlocker({
-                                           });
-        this.pageBlocker.render();
         this.trigger('drew', this);
 
     };
 
-    Object.defineProperty(Layout.prototype, 'blocker', {
-        get: function () {
-            return this.pageBlocker;
-        }
-    });
+
     return Layout;
 });

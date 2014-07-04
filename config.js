@@ -7,44 +7,22 @@ var path = require('path'),
 
 module.exports = {
     development: {
+        port: process.env.PORT,
+        host: process.env.IP,
         db: {
             client: 'pg',
-            connection: process.env.DATABASE_URL || 'postgres://xudapfydkuhypy:dJH5wfpn8RKmo2pQNErWbNr-YH@ec2-50-16-201-126.compute-1.amazonaws.com:5432/d5hg1nbrvhej3t?ssl=true',
+            connection: process.env.DATABASE_URL || 'postgres://fxvceqqysemlwc:rnUY32jriRy6CpN7cQqA8--GW-@ec2-54-204-24-202.compute-1.amazonaws.com:5432/dchcac64ft1r0r?ssl=true',
             debug: true
         },
         redis: {
-            url: process.env.REDISTOGO_URL || 'redis://redistogo:1bad3ce2e9a04570990325bad31aea4a@grideye.redistogo.com:10234'
+            url: process.env.REDISTOGO_URL || 'redis://redistogo:07ee82ef2f5052d6ac9e01500ea935d7@grouper.redistogo.com:10049'
         },
         session: {
-            secret: "RZm3Fc5OPUUK9LrHGzq03WY2uTon9MK1rSJVEXcOM7vGN9o9v6uQl3KoDr14Uax"
+            secret: "rzpbNQW8TYf48cMr5hEnR34g"
         },
-        app: {
-            name: pkg.name,
-            version: pkg.version,
-            refreshFeedInterval: 60,
-            refreshTodoInterval: 60,
-            port: process.env.PORT || 5000
-        }
-    },
-
-    production: {
-        db: {
-            client: 'pg',
-            connection: process.env.DATABASE_URL || 'postgres://xudapfydkuhypy:dJH5wfpn8RKmo2pQNErWbNr-YH@ec2-50-16-201-126.compute-1.amazonaws.com:5432/d5hg1nbrvhej3t?ssl=true',
-            debug: false
-        },
-        redis: {
-            url: process.env.REDISTOGO_URL || 'redis://redistogo:1bad3ce2e9a04570990325bad31aea4a@grideye.redistogo.com:10234'
-        },
-        session: {
-            secret: "XNapHtFGNXYfvaB87KNQZnw8xBcit3wIFWe64oklG2pKUfrgbgYdn2B5efFx"
-        },
-        app: {
-            name: pkg.name,
-            version: pkg.version,
-            refreshFeedInterval: 60,
-            refreshTodoInterval: 60,
-            port: process.env.PORT || 80
+        google: {
+            clientId: '814955543459-fvkgsu4vg8arpn5bf0q4k1brs3tat5id.apps.googleusercontent.com',
+            clientSecret: 'yN9t4cwfuHh8ZH0sXQ6pYyel'
         }
     }
 };

@@ -1,19 +1,21 @@
-/*global NProgress, Backbone, _s*/
-define(function (require) {
-    var moment = require('moment'),
+
+define(function(require) {
+    var Backbone = require('backbone'),
+        progress = require('views/controls/progress'),
+        moment = require('moment'),
         Toastr = require('toastr'),
         Promise = require('bluebird'),
         Router = Backbone.Router.extend({
-                                            routes: {
-                                                "*action": 'defaultAction'
-                                            }
-                                        });
-    Router.prototype.initialize = function (options) {
+            routes: {
+                "*action": 'defaultAction'
+            }
+        });
+    Router.prototype.initialize = function(options) {
         Backbone.Router.prototype.initialize.call(this, options);
         this.app = options.app || console.error("app must be passed!");
     };
 
-    Router.prototype.defaultAction = function (url) {
+    Router.prototype.defaultAction = function(url) {
 
         if (!url) {
             url = 'index/index';
@@ -44,54 +46,61 @@ define(function (require) {
         if (!userId && !(controller === 'index' && action === 'sign-in') && !(controller === 'index' && action === 'register')) {
             session.set('redirectUrl', window.location.hash);
             console.log("Will navigate to " + 'index/sign-in');
-            this.navigate('index/sign-in', {replace: true, trigger: true});
+            this.navigate('index/sign-in', {
+                replace: true,
+                trigger: true
+            });
             return;
         }
-        
+
         // if(!session.get('storeId') && !(controller === 'user' && action === 'select-store') ){
         //     //navigate to select store
         //     this.navigate('user/select-store', {replace: true, trigger: true});
         //     return;
         // }
-        
-        NProgress.start();
+
+        progress.start();
 
         var pagePath = 'pages/' + controller + '/' + action;
-        require([pagePath], function (Page) {
-            NProgress.inc();
+
+        require([pagePath], function(Page) {
+            progress.inc();
             this.app.page = new Page({
-                                         el        : this.app.layout.controls.mainPanel,
-                                         controller: controller,
-                                         action    : action,
-                                         app       : this.app,
-                                         params    : params
-                                     });
+                el: this.app.layout.controls.mainPanel,
+                controller: controller,
+                action: action,
+                app: this.app,
+                params: params
+            });
             var actionContainer = this.app.layout.controls.mainPanel.parent();
             actionContainer.attr('id', 'action-' + action);
             var controllerContainer = actionContainer.parent();
             controllerContainer.attr('id', 'controller-' + controller);
 
 
-            this.listenToOnce(this.app.page, 'ready', function () {
-                NProgress.done();
+            this.listenToOnce(this.app.page, 'ready', function() {
+                progress.done();
             });
 
-
             this.app.page.start();
-            NProgress.inc();
-            this.app.page.render();
-            this.app.trigger('page-rendered', this.app.page);
+            progress.inc();
+            Promise.resolve(this.app.page.render())
+            .then(function(){
+                progress.done();
+                this.app.trigger('page-rendered', this.app.page);
+            }.bind(this));
+            
 
         }.bind(this));
 
     };
-    Router.prototype.parseUrlParams = function (url) {
+    
+    Router.prototype.parseUrlParams = function(url) {
         if (!url) {
             url = window.location.hash;
         }
         var parts = url.split('/');
-        var params = {
-        };
+        var params = {};
 
         if (parts.length > 2) {
             var i;
@@ -102,7 +111,7 @@ define(function (require) {
         return params;
     };
 
-    Router.prototype.start = function () {
+    Router.prototype.start = function() {
         Backbone.history.start();
     };
 

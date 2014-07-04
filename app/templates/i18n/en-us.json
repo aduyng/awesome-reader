@@ -1,3 +1,4 @@
 {
-    "signIn": "Sign In"
+    "signIn": "Please Sign In"
+    ,"signInWithGoogle": "Sign In with Google"
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     
     <link media="all" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
-    <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css"/>
+    <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
     <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.0.1/css/bootstrap3/bootstrap-switch.min.css"/>
     <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.0/css/toastr.css"/>
     <link media="all" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.1.2/nprogress.min.css"/>
@@ -33,14 +33,11 @@
     <script type="text/javascript">
         window.config = {
             name               : '{{pkg.name}}',
-            version            : '{{pkg.version}}',
-            refreshFeedInterval: {{config.app.refreshFeedInterval}},
-            refreshTodoInterval: {{config.app.refreshTodoInterval}}
+            version            : '{{pkg.version}}'
         };
+        
         window.session = {
-            storeId: {{session.storeId}},
-            userId: {{session.userId}},
-            roleId: {{session.roleId}}
+            userId: {{session.userId}}
         };
     </script>
 </head>

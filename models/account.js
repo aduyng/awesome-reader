@@ -3,8 +3,8 @@ var db = require('../db'),
     _s = require('underscore.string');
 
 var Model = db.Model.extend({
-                                tableName: 'Base'
-                            });
+    tableName: 'Account'
+});
 
 
 module.exports = Model;

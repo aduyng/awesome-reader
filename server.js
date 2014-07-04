@@ -13,9 +13,52 @@ var http = require('http'),
     app = express(),
     pkg = require('./package.json'),
     load = require('express-load'),
-    colors = require('colors');
+    colors = require('colors'),
+    Account = require('./models/account'),
+    everyauth = require('everyauth');
 
+everyauth.everymodule.findUserById( function (userId, callback) {
+    console.log('userId', userId);
+    
+  return Account.forge({id: userId})
+    .fetch()
+    .then(function(doc){
+        if( !doc ){
+            callback('User not found!', undefined);
+            return;
+        }
+        callback(undefined, doc);
+    });
+});
 
+everyauth.everymodule.moduleErrback( function (err) {
+  console.log('ERROR', err);
+});
+
+everyauth.google.appId(config.google.clientId)
+    .appSecret(config.google.clientSecret)
+    .scope('https://www.googleapis.com/auth/userinfo.profile')
+    .findOrCreateUser(function(sess, accessToken, extra, googleUser) {
+        googleUser.refreshToken = extra.refresh_token;
+        googleUser.expiresIn = extra.expires_in;
+        return Account.forge()
+            .query(function(qb){
+                qb.where('service', 'google');
+                qb.where('serviceUid', googleUser.id );
+            })
+            .fetch()
+            .then(function(doc){
+                if( !doc ){
+                    return Account.forge({
+                        service: 'google',
+                        serviceUid: googleUser.id,
+                        extras: JSON.stringify(googleUser)
+                    })
+                    .save();
+                }
+                return doc;
+            });
+}).redirectPath('/');
 
 
 //app.use(express.favicon());
@@ -23,6 +66,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
+
 
 app.engine('hbs', exphbs({
     defaultLayout: false,
@@ -36,41 +80,36 @@ app.use(express.session({
 }));
 app.use(express.compress());
 
+app.use(everyauth.middleware(app));
+
 app.use(app.router);
-app.use(function(err, req, res, next) {
-    console.error(err);
-    switch (err.name) {
-    case 'AppError':
-        res.send(err.code, {
-            message: err.message,
-            data: err.data
-        });
-        break;
-    default:
-        res.send(500, 'Something broke!');
-        break;
-    }
-});
 
 app.use(express.static(path.join(__dirname, '/app')));
-app.all('*', function(req, res, next){
-    if( req.headers['x-version']  && req.headers['x-version'] != pkg.version ){
-        res.send(426);
-        return;
-    }
-    if( !req.body ){
-        req.body = {};
-    }
-   req.body.now = req.headers['x-now'] || moment().unix();
-   next();
-});
 
 app.get('/', function(req, res) {
     var session = {
-        storeId: req.session.storeId || 0,
-        userId: req.session.userId || 0,
-        roleId: req.session.roleId || 0
-    };
+        userId: 0
+    };    
+                
+    //TODO: will need to fix the auth when accept other auth service
+    if( req.session.auth  && req.session.auth.loggedIn && req.session.auth.google ){
+        return Account.forge()
+            .query(function(qb){
+                qb.where('service', 'google');
+                qb.where('serviceUid', req.session.auth.google.user.id );
+            })
+            .fetch()
+            .then(function(doc){
+                session.userId = doc.id;
+                
+                res.render('home', {
+                    path: 'dist/' + pkg.version,
+                    pkg: pkg,
+                    config: config,
+                    session: session
+                });
+            });
+    }
 
     res.render('home', {
         path: 'dist/' + pkg.version,
@@ -83,10 +122,9 @@ app.get('/', function(req, res) {
 
 load('controllers').then('routes').into(app);
 
+var port = Number(config.port || process.env.PORT || 5000);
+var host = config.host || process.env.IP;
 
-
-
-var port = Number(process.env.PORT || config.app.port || 5000);
-var server = app.listen(port, function() {
-    console.log('Listening on port %d', server.address().port);
+var server = app.listen(port, host, function() {
+    console.log('Listening on port %s:%d', host, port);
 });

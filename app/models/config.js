@@ -1,5 +1,6 @@
 define(function (require) {
-    var Super = Backbone.Model;
+    
+    var Super = require('./base');
 
     var Config = Super.extend({
                                   defaults: {

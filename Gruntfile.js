@@ -9,15 +9,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
                          pkg           : pkg,
-                         coffee        : {
-                             frontend: {
-                                 expand: true,
-                                 cwd   : './app',
-                                 src   : ['**/*.coffee'],
-                                 dest  : "./app",
-                                 ext   : '.js'
-                             }
-                         },
+                         
                          watch         : {
                              dev     : {
                                  files: [
@@ -82,18 +74,6 @@ module.exports = function (grunt) {
                                  }
                              }
                          },
-
-//        htmlmin: {                                     // Task
-//            server: {                                      // Target
-//                options: {                                 // Target options
-//                    removeComments: true,
-//                    collapseWhitespace: true
-//                },
-//                files: {
-//                    './dist/app/index.html': './app/public/index.html'
-//                }
-//            }
-//        },
                          requirejs     : {
                              compile: {
                                  options: {
@@ -121,7 +101,7 @@ module.exports = function (grunt) {
                                      //in a separate configuration, set this property to the location of that
                                      //main JS file. The first requirejs({}), require({}), requirejs.config({}),
                                      //or require.config({}) call found in that file will be used.
-                                     //mainConfigFile: 'app/init.js',
+                                     mainConfigFile: 'app/init.js',
 
                                      //Set paths for modules. If relative paths, set relative to baseUrl above.
                                      //If a special value of "empty:" is used for the path value, then that
@@ -130,31 +110,9 @@ module.exports = function (grunt) {
                                      //Useful to map module names that are to resources on a CDN or other
                                      //http: URL when running in the browser and during an optimization that
                                      //file should be skipped because it has no dependencies.
-                                     paths                     : {
-                                         underscore             : pkg['cdn'] ? '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min' : '/vendors/underscore/underscore',
-                                         backbone               : pkg['cdn'] ? '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min' : '/vendors/backbone/backbone',
-                                         bootstrap              : pkg['cdn'] ? '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min' : '/vendors/bootstrap/dist/js/bootstrap',
-                                         'bootstrap-switch'     : pkg['cdn'] ? '//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.0.0/js/bootstrap-switch.min' : '/vendors/bootstrap-switch/build/js/bootstrap-switch.min',
-                                         text                   : 'vendors/requirejs-text/text',
-                                         hbs                    : 'vendors/require-handlebars-plugin/hbs',
-                                         i18nprecompile         : 'vendors/require-handlebars-plugin/hbs/i18nprecompile',
-                                         json2                  : 'vendors/require-handlebars-plugin/hbs/json2',
-                                         goog                   : 'vendors/requirejs-plugins/src/goog',
-                                         async                  : 'vendors/requirejs-plugins/src/async',
-                                         propertyParser         : 'vendors/requirejs-plugins/src/propertyParser',
-                                         jquery                 : 'vendors/jquery/dist/jquery',
-                                         bootstrapValidator     : 'vendors/bootstrapValidator/dist/js/bootstrapValidator.min',
-                                         bootstrapConfirmButton : 'vendors/bootstrap-confirm-button/bootstrap-confirm-button',
-                                         'bootstrap-touchspin'  : 'vendors/bootstrap-touchspin/bootstrap-touchspin/bootstrap.touchspin',
-                                         toastr                 : pkg['cdn'] ? '//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.0/js/toastr.min' : '/vendors/toastr/toastr.min',
-                                         ladda                  : pkg['cdn'] ? '//cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.1.0/ladda.min' : '/vendors/ladda/dist/ladda.min',
-                                         spin                   : pkg['cdn'] ? '//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.0/spin.min' : '/vendors/ladda/dist/spin.min',
-                                         moment                 : pkg['cdn'] ? "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min" : '/vendors/moment/min/moment.min',
-                                         nprogress              : pkg['cdn'] ? "//cdnjs.cloudflare.com/ajax/libs/nprogress/0.1.2/nprogress.min" : '/vendors/nprogress/nprogress',
-                                         'underscore.string'    : pkg['cdn'] ? '//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min' : '/vendors/underscore.string/dist/underscore.string.min',
-                                         accounting             : pkg['cdn'] ? '//cdnjs.cloudflare.com/ajax/libs/accounting.js/0.3.2/accounting.min' : '/vendors/accounting/accounting.min',
-                                         bluebird               : '//cdnjs.cloudflare.com/ajax/libs/bluebird/1.2.2/bluebird'
-                                     },
+                                    //  paths                     : {
+                                         
+                                    //  },
                                      //Configure CommonJS packages. See http://requirejs.org/docs/api.html#packages
                                      //for more information.
                                      packages                  : [],
@@ -163,71 +121,70 @@ module.exports = function (grunt) {
                                      //the path will default to be a directory called "build" as a sibling
                                      //to the build file. All relative paths are relative to the build file.
                                      //    dir: "./",
-
                                      //If shim config is used in the app during runtime, duplicate the config
                                      //here. Necessary if shim config is used, so that the shim's dependencies
                                      //are included in the build. Using "mainConfigFile" is a better way to
                                      //pass this information though, so that it is only listed in one place.
                                      //However, if mainConfigFile is not an option, the shim config can be
                                      //inlined in the build config.
-                                     hbs                       : { // optional
-                                         helpers          : true,            // default: true
-                                         i18n             : true,              // default: false
-                                         disableI18n      : false,
-                                         templateExtension: 'hbs', // default: 'hbs'
-                                         partialsUrl      : ''           // default: ''
-                                     },
-                                     shim                      : {
-                                         backbone               : {
-                                             deps   : ['underscore', 'jquery'],
-                                             exports: 'Backbone'
-                                         },
-                                         toastr                 : {
-                                             deps: ['jquery']
-                                         },
-                                         nprogress              : {
-                                             deps: ['jquery']
-                                         },
-                                         bootstrap              : {
-                                             deps: ["jquery"]
-                                         },
-                                         bootstrapConfirmButton : {
-                                             deps: ["jquery", "bootstrap"]
-                                         },
-                                         'bootstrap-touchspin'  : {
-                                             deps: ["jquery", "bootstrap"]
-                                         },
-                                         ladda                  : {
-                                             deps: ["spin"]
-                                         },
-                                         'jquery.cookie'        : {
-                                             deps: ['jquery']
-                                         },
-                                         'jqBootstrapValidation': {
-                                             deps: ['jquery']
-                                         },
-                                         'bootstrap-switch'     : {
-                                             deps: ['jquery']
+                                    //  hbs                       : { // optional
+                                    //      helpers          : true,            // default: true
+                                    //      i18n             : true,              // default: false
+                                    //      disableI18n      : false,
+                                    //      templateExtension: 'hbs', // default: 'hbs'
+                                    //      partialsUrl      : ''           // default: ''
+                                    //  },
+                                    //  shim                      : {
+                                    //      backbone               : {
+                                    //          deps   : ['underscore', 'jquery'],
+                                    //          exports: 'Backbone'
+                                    //      },
+                                    //      toastr                 : {
+                                    //          deps: ['jquery']
+                                    //      },
+                                    //      nprogress              : {
+                                    //          deps: ['jquery']
+                                    //      },
+                                    //      bootstrap              : {
+                                    //          deps: ["jquery"]
+                                    //      },
+                                    //      bootstrapConfirmButton : {
+                                    //          deps: ["jquery", "bootstrap"]
+                                    //      },
+                                    //      'bootstrap-touchspin'  : {
+                                    //          deps: ["jquery", "bootstrap"]
+                                    //      },
+                                    //      ladda                  : {
+                                    //          deps: ["spin"]
+                                    //      },
+                                    //      'jquery.cookie'        : {
+                                    //          deps: ['jquery']
+                                    //      },
+                                    //      'jqBootstrapValidation': {
+                                    //          deps: ['jquery']
+                                    //      },
+                                    //      'bootstrap-switch'     : {
+                                    //          deps: ['jquery']
 
-                                         },
-                                         router                 : {
-                                             depts: [
-                                                 'nprogress'
-                                             ]
-                                         },
-                                         app                    : {
-                                             deps: [
-                                                 'jquery',
-                                                 'underscore',
-                                                 'backbone',
-                                                 'bootstrap',
-                                                 'toastr',
-                                                 'accounting',
-                                                 'moment',
-                                                 'nprogress'
-                                             ]
-                                         }
-                                     },
+                                    //      },
+                                    //      router                 : {
+                                    //          depts: [
+                                    //              'nprogress'
+                                    //          ]
+                                    //      },
+                                    //      app                    : {
+                                    //          deps: [
+                                    //              'jquery',
+                                    //              'underscore',
+                                    //              'backbone',
+                                    //              'bootstrap',
+                                    //              'toastr',
+                                    //              'accounting',
+                                    //              'moment',
+                                    //              'nprogress'
+                                    //          ]
+                                    //      }
+                                    //  },
 
                                      //As of RequireJS 2.0.2, the dir above will be deleted before the
                                      //build starts again. If you have a big build and are not doing
@@ -241,7 +198,7 @@ module.exports = function (grunt) {
                                      //is specified, i18n resources will not be inlined. Only one locale
                                      //can be inlined for a build. Root bundles referenced by a build layer
                                      //will be included in a build layer regardless of locale being set.
-                                     locale                    : "vi-vn",
+                                     locale                    : "en-us",
 
                                      //How to optimize all the JS files in the build output directory.
                                      //Right now only the following values
@@ -254,7 +211,6 @@ module.exports = function (grunt) {
                                      //- "closure.keepLines": Same as closure option, but keeps line returns
                                      //in the minified files.
                                      //- "none": no minification will be done.
-//                    optimize                  : "uglify2",
                                      optimize                  : "uglify2",
 
                                      //Introduced in 2.1.2: If using "dir" for an output directory, normally the
@@ -608,45 +564,10 @@ module.exports = function (grunt) {
                                      //to name. The name of the optimized file is specified by 'out'.
                                      name                      : "init",
                                      include                   : [
-                                         'app',
-                                         'models/role',
-                                         'models/base',
-
-                                         "pages/index/sign-in",
-                                         "pages/index/sign-out",
-                                         "pages/index/index",
+                                         'app'
                                          
-                                         
-                                         "pages/index/register",
-
-                                         "pages/ticket/view",
-
-
-                                         "pages/feed/index",
-                                         "pages/todo/index",
-                                         
-                                         "pages/ticket/index",
-                                         "pages/ticket/view",
-                                         
-                                         "pages/bill/index",
-                                         "pages/bill/view",
-                                         
-                                         "pages/store/daily-summary",
-                                         
-                                         
-                                         "pages/category/index",
-                                         "pages/category/edit",
-                                         
-                                         "pages/product/index",
-                                         "pages/product/edit",
-                                         
-                                         "pages/store/edit",
-                                         
-                                         "pages/user/index",
-                                         "pages/user/edit",
-                                         "pages/user/my-stores",
-                                            
-
+                                         ,'pages/index/sign-in'
+                                         ,'pages/index/index'
                                      ],
                                      excludeShallow                   : [
                                          'dist'
@@ -881,7 +802,6 @@ module.exports = function (grunt) {
                                          cwd   : './app',
                                          dest  : './app/dist/<%=pkg.version%>',
                                          src   : [
-                                             'style.css',
                                              'images/icon/*'
                                          ]
                                      }
@@ -918,7 +838,7 @@ module.exports = function (grunt) {
                                      cleancss: true
                                  },
                                  files  : {
-                                     "./app/style.css": "./app/style.less"
+                                     "./app/dist/<%=pkg.version%>/style.css": "./app/style.less"
                                  }
                              }
                          },
@@ -1014,37 +934,6 @@ module.exports = function (grunt) {
 
                      });
 
-    grunt.registerTask('stage-nowatch', function (target) {
-        grunt.task.run([
-                           'clean',
-                           'requirejs',
-                           'copy',
-                           'less'
-                       ]);
-    });
-
-    grunt.registerTask('stage', function (target) {
-        grunt.task.run([
-                           'clean',
-                           'requirejs',
-                           'copy',
-                           'less',
-                           'watch:stage'
-                       ]);
-    });
-
-    grunt.registerTask('default', function (target) {
-        grunt.task.run([
-                           'clean',
-                           'requirejs',
-                           'less',
-                           'copy',
-                           'file-creator:package.json',
-                           'shell:server',
-                           'watch:dev'
-                       ]);
-    });
-    
     grunt.registerTask('dev', function (target) {
         grunt.task.run([
                            'clean:frontend',
@@ -1062,24 +951,8 @@ module.exports = function (grunt) {
                            'requirejs',
                            'less',
                            'copy:frontend'
-                           
                        ]);
     });
-    
-    // grunt.registerTask('dev-build', function (target) {
-    //     grunt.task.run([
-    //                       'clean:frontend',
-    //                       'requirejs',
-    //                       'less',
-    //                       'copy:frontend',
-    //                       'clean:backend',
-    //                       'copy:backend',
-    //                       'file-creator:package.json.build',
-    //                       'shell:start-dev-build',
-    //                       'watch:dev-build'
-    //                   ]);
-    // });
-    
 
 
     grunt.registerTask('test', function (target) {
@@ -1087,31 +960,4 @@ module.exports = function (grunt) {
                            'watch:test'
                        ]);
     });
-//
-//    grunt.registerTask('test', [
-//        'clean:server',
-//        'concurrent:test',
-//        'express:test',
-//        'karma'
-//    ]);
-//
-//    grunt.registerTask('build', [
-//        'clean:dist',
-//        'useminPrepare',
-//        'concurrent:dist',
-//        'concat',
-//        'copy',
-//        'cdnify',
-//        'ngmin',
-//        'cssmin',
-//        'uglify',
-//        'rev',
-//        'usemin'
-//    ]);
-//
-//    grunt.registerTask('default', [
-//        'jshint',
-//        'test',
-//        'build'
-//    ]);
 };
