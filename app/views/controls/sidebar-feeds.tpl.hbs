@@ -1,0 +1,9 @@
+{{#if feeds.length}}
+    <div class="list-group">
+        {{#each feeds}}
+            <a href="#" class="list-group-item">{{name}}</a>
+        {{/each}}
+    </div>
+{{else}}
+    <p class="alert alert-warning">There is no feeds added yet.</p>
+{{/if}}

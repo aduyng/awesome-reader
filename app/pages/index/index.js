@@ -1,6 +1,7 @@
 define(function(require) {
     var Super = require('views/page'),
         Template = require('hbs!./index.tpl'),
+        Sidebar = require('views/controls/sidebar'),
         Promise = require('bluebird');
 
     var Page = Super.extend({});
@@ -15,7 +16,13 @@ define(function(require) {
             this.$el.html(Template({
                 id: this.id
             }));
-
+            this.mapControls();
+            
+            this.sidebar = new Sidebar({
+                el: this.controls.sidebar
+            });
+            this.sidebar.render();
+            
             return this.ready();
         }.bind(this));
     };
