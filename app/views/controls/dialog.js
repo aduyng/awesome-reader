@@ -1,6 +1,6 @@
 define(function (require) {
     var Super = require('../base'),
-        Template = require('text!./dialog.html');
+        Template = require('hbs!./dialog.tpl');
 
     var View = Super.extend({
         className: 'modal fade'
@@ -9,7 +9,7 @@ define(function (require) {
     View.prototype.initialize = function (options) {
         var yes = {
             label: 'OK',
-            iconClass: 'icon-check',
+            iconClass: 'fa fa-check',
             buttonClass: 'btn-primary'
         };
         if (options && options.yes) {
@@ -17,7 +17,7 @@ define(function (require) {
         }
         var no = {
             label: 'Cancel',
-            iconClass: 'icon-remove',
+            iconClass: 'glyphicon glyphicon-remove',
             buttonClass: 'btn-default'
         };
 
@@ -36,7 +36,7 @@ define(function (require) {
     };
 
     View.prototype.open = function () {
-        this.$el.html(Mustache.to_html(Template, {
+        this.$el.html(Template({
             id: this.getId(),
             title: this.options.title,
             headerClass: this.options.title ? '' : 'hide',

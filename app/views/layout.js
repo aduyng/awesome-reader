@@ -1,6 +1,7 @@
 define(function (require) {
     var Super = require('views/base'),
         Nav = require('views/nav'),
+        Bootstrap = require('bootstrap'),
         Template = require("hbs!views/layout.tpl");
 
     var Layout = Super.extend({

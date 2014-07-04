@@ -1,7 +1,10 @@
 define(function (require) {
     var Super = require('views/base'),
         Switch = require('./switch'),
+        Dialog = require('./dialog'),
+        FeedForm = require('./feed-form'),
         FeedsTemplate = require('hbs!./sidebar-feeds.tpl'),
+        FormTemplate = require('hbs!./feed-form.tpl'),
         FeedCollection = require('collections/feed'),
         Template = require("hbs!./sidebar.tpl");
 
@@ -26,6 +29,7 @@ define(function (require) {
         });
                 
         var events = {};
+        events['click ' + this.toId('new')] = 'newClickHandler';
         
         this.delegateEvents(events);
         
@@ -41,6 +45,19 @@ define(function (require) {
         });
     };
     
+    View.prototype.newClickHandler = function(event){
+        var form = new FeedForm({
+            
+        });
+        var dialog = new Dialog({
+            title: 'Add a new Feed',
+            body: form,
+            autoOpen: true 
+        });
+        
+    };
+    
+    
     View.prototype.draw = function(){
         var editable = this.controls.lockSwitch.bootstrapSwitch('state');
         
@@ -48,6 +65,11 @@ define(function (require) {
             feeds: this.feeds.toJSON()
         }));
         
+        if( editable ){
+            this.controls.footer.removeClass('hidden');
+        }else{
+            this.controls.footer.addClass('hidden');
+        }
     };
     
     View.prototype.lockSwitchChangeHandler = function(event, state){
