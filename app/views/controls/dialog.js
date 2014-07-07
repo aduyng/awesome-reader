@@ -1,5 +1,6 @@
 define(function (require) {
-    var Super = require('../base'),
+    var _ = require('underscore'),
+        Super = require('../base'),
         Template = require('hbs!./dialog.tpl');
 
     var View = Super.extend({

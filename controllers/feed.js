@@ -4,6 +4,7 @@ var db = require('../db'),
     config = require('../config')[env],
     _ = require('underscore'),
     moment = require('moment'),
+    Feed = require('../models/feed'),
     request = require('request'),
     _s = require('underscore.string');
 
@@ -46,4 +47,28 @@ exports.parseInfo = function(req, res, next) {
         });
     }).catch(next);
 
+};
+
+exports.post = function(req, res, next){
+    return Feed.forge(_.extend(_.pick(req.body, 'iconUrl', 'name', 'url'), {userId: req.user.id}))
+        .save()
+        .then(function(doc){
+            res.send(doc.toJSON());
+        });
+};
+
+exports.put = function(req, res, next){
+    return Feed.forge({id: req.params.id})
+        .save(_.pick(req.body, 'iconUrl', 'name', 'url'), {patch: true})
+        .then(function(doc){
+            res.send(doc.toJSON());
+        });
+};
+
+exports.delete = function(req, res, next){
+    return Feed.forge({id: req.params.id})
+        .destroy()
+        .then(function(doc){
+            res.send(200);
+        });
 };

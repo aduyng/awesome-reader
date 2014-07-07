@@ -1,4 +1,4 @@
-var Super = require('collections/feed'),
+var Super = require('./base'),
     Model = require('../models/feed'),
     _ = require('underscore'),
     _s = require('underscore.string');

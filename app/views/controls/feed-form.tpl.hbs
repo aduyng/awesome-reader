@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for="{{id}}-url">URL</label>
     <div class="input-group">
-        <input type="text" id="{{id}}-url" class="form-control" placeholder="Enter Feed URL" value="{{data.url}}"/>
+        <input type="text" id="{{id}}-url" class="form-control {{id}}-field" placeholder="Enter Feed URL" value="{{data.url}}"/>
         <span class="input-group-btn">
             <button class="btn btn-default" id="{{id}}-auto-fill"  type="button"><i class="fa fa-magic"></i></button>
         </span>
@@ -10,13 +10,13 @@
 
 <div class="form-group">
     <label for="{{id}}-name">Name</label>
-    <input type="text" class="form-control" id="{{id}}-name" placeholder="Enter Feed name"  value="{{data.name}}">
+    <input type="text" class="form-control {{id}}-field" id="{{id}}-name" placeholder="Enter Feed name"  value="{{data.name}}">
 </div>
 
 <div class="form-group">
     <label for="{{id}}-icon-url">Icon URL</label>
     <div class="input-group">
         <span class="input-group-addon"><img src="{{data.imageIconUrl}}" width="16" height="16" id="{{id}}-icon" /></span>
-        <input type="text" class="form-control" id="{{id}}-icon-url" placeholder="Enter icon URL"  value="{{data.iconUrl}}">
+        <input type="text" class="form-control {{id}}-field" id="{{id}}-icon-url" placeholder="Enter icon URL"  value="{{data.iconUrl}}">
     </div>
 </div>

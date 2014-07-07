@@ -119,6 +119,22 @@ app.get('/', function(req, res) {
     });
 });
 
+//load the current user
+app.all('*', function(req, res, next){
+    if( req.session && !req.user && req.session.auth  && req.session.auth.loggedIn && req.session.auth.google ){
+        return Account.forge()
+            .query(function(qb){
+                qb.where('service', 'google');
+                qb.where('serviceUid', req.session.auth.google.user.id );
+            })
+            .fetch()
+            .then(function(doc){
+                req.user = doc;
+                next();
+            });
+    }
+    next();
+});
 
 load('controllers').then('routes').into(app);
 

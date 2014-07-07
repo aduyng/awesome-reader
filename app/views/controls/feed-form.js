@@ -27,6 +27,7 @@ define(function(require) {
 
         var events = {};
         events['click ' + this.toId('auto-fill')] = 'autoFillClickHandler';
+        events['change ' + this.toId('icon-url')] = 'iconUrlChangeHandler';
 
         this.delegateEvents(events);
     };
@@ -49,6 +50,14 @@ define(function(require) {
             }.bind(this));
         }
     };
+    
+    View.prototype.iconUrlChangeHandler = function(event){
+        var url = this.controls.iconUrl.val();
+        //TODO: validate the url
+        this.controls.icon.attr('src', url);
+    };
+    
+    
 
     return View;
 });

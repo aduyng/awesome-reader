@@ -1,7 +1,7 @@
 {{#if feeds.length}}
     <div class="list-group">
         {{#each feeds}}
-            <a href="#" class="list-group-item">{{name}}</a>
+            <a href="#" class="list-group-item">{{#if ../editable}}<div class="btn-group pull-right"><button class="btn btn-xs btn-default {{../../id}}-edit" data-id="{{this.id}}"><i class="fa fa-pencil"></i></button><button class="btn btn-xs btn-warning {{../../id}}-delete" data-id="{{this.id}}"><i class="fa fa-trash-o"></i></button></div>{{/if}}{{name}}</a>
         {{/each}}
     </div>
 {{else}}
